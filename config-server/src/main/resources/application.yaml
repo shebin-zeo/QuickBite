@@ -1,3 +1,32 @@
 spring:
   application:
     name: config-server
+  profiles:
+    active: native
+  cloud:
+    config:
+      server:
+        native:
+          search-locations: classpath:/config
+
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8760/eureka
+server:
+  port: 8888
+
+
+#Why "native" Mode?
+#
+#For now we use local config files.
+#
+#Later in production we switch to:
+#
+#spring:
+#  cloud:
+#    config:
+#      server:
+#        git:
+#          uri: https://github.com/shebin-zeo/quickbite-config
