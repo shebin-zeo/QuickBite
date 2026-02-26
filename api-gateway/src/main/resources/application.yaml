@@ -5,12 +5,21 @@ spring:
   application:
     name: api-gateway
 
+#Auto discover from eureka service registry
+#  cloud:
+#    gateway:
+#      discovery:
+#        locator:
+#          enabled: true
+#          lower-case-service-id: true
   cloud:
     gateway:
-      discovery:
-        locator:
-          enabled: true
-          lower-case-service-id: true
+      routes:
+        - id: user-service
+          uri: lb://USER-SERVICE
+          predicates:
+            - Path=/api/users/**
+#Above is the manual routing
 
 eureka:
   client:
