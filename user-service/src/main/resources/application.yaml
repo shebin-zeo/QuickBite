@@ -1,3 +1,41 @@
+
+
 spring:
   application:
     name: user-service
+  datasource:
+    url: jdbc:postgresql://ep-autumn-wave-aiy630c2-pooler.c-4.us-east-1.aws.neon.tech:5432/neondb?sslmode=require
+    username: user_service
+    password: Quickbite@2026
+    driver-class-name: org.postgresql.Driver
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8585/realms/QuickBites/protocol/openid-connect/token
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+  config:
+    import: optional:configserver:http://localhost:8888
+
+server:
+  port: 8081
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8760/eureka
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+
+
